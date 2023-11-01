@@ -1,17 +1,18 @@
-const CHATGPT_KEY = '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'
+const CHATGPT_KEY = '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';
 
 
 hideLoading();
 
 async function onClickSearch(){
+
     showLoading();
 
     let busqueda = document.getElementById('txtSearch').value;
     let containerHTML = document.getElementById('SearchResult');
     let prompt = getPrompt(busqueda);
-
     let response = await callToGpt(prompt);
     containerHTML.innerHTML = response;
+    
   hideLoading();
 }
 
@@ -22,7 +23,8 @@ async function callToGpt(prompt){
         messages: [
             {
                role: 'user', content: prompt}
-        ]
+        ],
+        temperature: 0.7
     }
     const request = {
         method: 'POST',
@@ -44,7 +46,7 @@ async function callToGpt(prompt){
 
 function getPrompt(destino){
 
-    return `Eres un experto en Help Desk propagas, necesito que identifiques lel problema que tengo y le des una buena respuesta ${destino}.en cada punto desgloza un poco el detalle. Dame precision en tus respuestas, Es importante que no hagas ningun tipo de saludos o algo por el estilo, simplemente muestra la respuesta. `
+    return `Eres un experto en Help Desk propagas, necesito que identifiques los problema que tengo y le des una buena respuesta ${destino}.en cada punto desgloza un poco el detalle. Dame precision en tus respuestas, Es importante que no hagas ningun tipo de saludos o algo por el estilo, simplemente muestra la respuesta. `
 
 }
 
